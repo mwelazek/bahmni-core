@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.bahmni.module</groupId>
         <artifactId>bahmni</artifactId>
-        <version>0.92-SNAPSHOT</version>
+        <version>0.90-SNAPSHOT</version>
     </parent>
     <artifactId>bahmnicore-omod</artifactId>
     <packaging>jar</packaging>
@@ -19,7 +19,7 @@
         <gem.home>${basedir}/.rubygems</gem.home>
         <gem.path>${basedir}/.rubygems</gem.path>
         <uiframeworkVersion>3.3.1</uiframeworkVersion>
-        <bedManagementVersion>5.7.0</bedManagementVersion>
+        <bedManagementVersion>5.6-SNAPSHOT</bedManagementVersion>
     </properties>
 
     <dependencies>
@@ -67,8 +67,47 @@
         <dependency>
             <groupId>org.bahmni.module</groupId>
             <artifactId>mail-appender</artifactId>
-            <version>0.92-SNAPSHOT</version>
+            <version>0.90-SNAPSHOT</version>
         </dependency>
+
+		<!-- APPOINTMENTS MODULE DEPENDENCY -->
+
+		<dependency>
+			<groupId>org.openmrs.module</groupId>
+			<artifactId>appointments-api</artifactId>
+		</dependency>
+
+		<!-- APPOINTMENTS MODULE DEPENDENCY -->
+
+        <!-- XDS Sender Dependency -->
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>xds-sender-api</artifactId>
+        </dependency>
+        <!-- XDS Sender Dependency -->
+
+        <!-- Registration Core Api Dependency -->
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>registrationcore-omod</artifactId>
+            <version>${registrationCoreApiVersion}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>registrationcore-api</artifactId>
+            <version>${registrationCoreApiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Registration Core Api Dependency -->
+
+        <!--<dependency>
+            <groupId>org.openmrs.module</groupId>
+            <artifactId>providermanagement-api</artifactId>
+        </dependency>-->
+		
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>emrapi-api-1.12</artifactId>
@@ -104,7 +143,7 @@
         <dependency>
             <groupId>org.bahmni.module</groupId>
             <artifactId>common</artifactId>
-            <version>0.92-SNAPSHOT</version>
+            <version>0.90-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.bahmni.module</groupId>
@@ -236,7 +275,7 @@
         <dependency>
             <groupId>org.bahmni.test</groupId>
             <artifactId>bahmni-test-commons</artifactId>
-            <version>0.92-SNAPSHOT</version>
+            <version>0.90-SNAPSHOT</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
@@ -286,13 +325,13 @@
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>rulesengine-api</artifactId>
-            <version>0.92-SNAPSHOT</version>
+            <version>0.90-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.openmrs.module</groupId>
             <artifactId>rulesengine-api</artifactId>
-            <version>0.92-SNAPSHOT</version>
+            <version>0.90-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

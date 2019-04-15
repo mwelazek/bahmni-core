@@ -10,14 +10,10 @@ import org.openmrs.PersonAddress;
 import org.openmrs.PersonAttribute;
 import org.openmrs.Visit;
 import org.openmrs.VisitAttribute;
-import org.openmrs.Concept;
-import org.openmrs.ConceptName;
 import org.openmrs.api.APIException;
 import org.openmrs.api.VisitService;
-import org.openmrs.api.context.Context;
 import org.openmrs.module.bahmniemrapi.encountertransaction.command.impl.BahmniVisitAttributeService;
 import org.openmrs.module.bahmniemrapi.visitlocation.BahmniVisitLocationServiceImpl;
-import org.openmrs.util.LocaleUtility;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -43,7 +39,7 @@ public class PatientResponseMapper {
 
         Integer visitLocationId = bahmniVisitLocationService.getVisitLocation(loginLocationUuid).getLocationId();
         List<Visit> activeVisitsByPatient = visitService.getActiveVisitsByPatient(patient);
-
+        
         patientResponse = new PatientResponse();
         patientResponse.setUuid(patient.getUuid());
         patientResponse.setPersonId(patient.getPatientId());
@@ -84,18 +80,7 @@ public class PatientResponseMapper {
         String queriedPersonAttributes = patientSearchResultFields.stream()
                 .map(attributeName -> {
                     PersonAttribute attribute = patient.getAttribute(attributeName);
-                    if(attribute != null) {
-                        if("org.openmrs.Concept".equals(attribute.getAttributeType().getFormat())) {
-                            Concept concept = Context.getConceptService().getConcept(attribute.getValue());
-                            ConceptName fullySpecifiedName = concept.getFullySpecifiedName(Context.getLocale());
-                            ConceptName conceptFullySpecifiedName = (fullySpecifiedName == null) ? concept.getFullySpecifiedName(LocaleUtility.getDefaultLocale()) : fullySpecifiedName;
-                            return formKeyPair(attributeName, conceptFullySpecifiedName != null ? conceptFullySpecifiedName.getName() : null);
-                        }
-                        else {
-                            return formKeyPair(attributeName, attribute.getValue());
-                        }
-                    }
-                    return null;
+                    return attribute == null ? null : formKeyPair(attributeName, attribute.getValue());
                 }).filter(Objects::nonNull)
                 .collect(Collectors.joining(","));
         patientResponse.setCustomAttribute(formJsonString(queriedPersonAttributes));
@@ -145,7 +130,7 @@ public class PatientResponseMapper {
             address = (String) PropertyUtils.getProperty(personAddress, propertyName);
         } catch (IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
             e.printStackTrace();
-            throw new APIException("cannot toString value for address field" + addressField, e);
+            throw new APIException("cannot get value for address field" + addressField, e);
         }
         return address;
     }

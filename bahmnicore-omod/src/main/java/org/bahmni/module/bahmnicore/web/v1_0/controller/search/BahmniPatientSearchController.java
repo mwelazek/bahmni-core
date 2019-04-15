@@ -31,7 +31,6 @@ public class BahmniPatientSearchController extends BaseRestController {
 
     private BahmniPatientService bahmniPatientService;
 
-
     @Autowired
     public BahmniPatientSearchController(BahmniPatientService bahmniPatientService) {
         this.bahmniPatientService = bahmniPatientService;

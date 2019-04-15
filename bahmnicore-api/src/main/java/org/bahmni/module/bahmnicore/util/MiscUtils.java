@@ -10,7 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
-public class MiscUtils {
+public class MiscUtils {	
     public static List<Concept> getConceptsForNames(List<String> conceptNames, ConceptService conceptService) {
         //Returning null for the sake of UTs
         if (CollectionUtils.isNotEmpty(conceptNames)) {
@@ -32,5 +32,21 @@ public class MiscUtils {
                 bahmniObservation.setUuid(UUID.randomUUID().toString());
             }
         }
+    }
+	
+    public static BahmniObservation getFollowUpDateObservation(Collection<BahmniObservation> bahmniObservations) {
+		BahmniObservation observation = null;
+        for (BahmniObservation bahmniObservation : bahmniObservations) {
+			for(BahmniObservation groupMember : bahmniObservation.getGroupMembers()) {
+				for(BahmniObservation groupMember2 : groupMember.getGroupMembers()) {
+					if(groupMember2.getConceptUuid().equals("88489023-783b-4021-b7a9-05ca9877bf67")) {
+						if(groupMember2.getValue() != null){
+							observation = groupMember2;
+						}
+					}				
+				}
+			}
+        }
+		return observation;
     }
 }

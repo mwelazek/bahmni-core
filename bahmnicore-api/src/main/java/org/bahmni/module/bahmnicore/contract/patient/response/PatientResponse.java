@@ -1,7 +1,5 @@
 package org.bahmni.module.bahmnicore.contract.patient.response;
 
-
-
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
